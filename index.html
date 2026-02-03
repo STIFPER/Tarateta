@@ -3,687 +3,660 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
-  <title>TARATERA — Product Menu</title>
+  <title>Catalog Menu</title>
 
-  <!-- Fonts (safe + mobile-friendly) -->
+  <!-- Montserrat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --ink:#1e3637;            /* primary text (your brand) */
-      --teal:#0a8a7a;           /* accent */
-      --teal-2:#0b6f63;         /* deeper accent */
-      --mint:#6aa59b;           /* muted bar */
-      --cream:#f6f1e7;          /* cream */
+      --ci-bg:#238678;
+
       --paper:#ffffff;
-      --line:rgba(30,54,55,.18);
-      --shadow:0 18px 40px rgba(0,0,0,.10);
-      --radius:18px;
+      --ink:#1e3637;
+      --muted: rgba(30,54,55,.72);
+      --line: rgba(30,54,55,.16);
+
+      --shadow: 0 18px 42px rgba(0,0,0,.12);
+      --radius: 18px;
     }
 
     *{ box-sizing:border-box; }
+    html,body{ height:100%; }
     body{
       margin:0;
-      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--ink);
-      background:#0f2d2f;
+      font-family: Montserrat, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--ci-bg);
     }
 
-    .frame{
-      max-width:980px;
-      margin:0 auto;
-      padding:12px;
+    /* Outer frame */
+    .wrap{
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 14px;
     }
 
     .sheet{
-      background:var(--paper);
-      border-radius:22px;
-      overflow:hidden;
-      border:10px solid rgba(246,241,231,.10);
-      box-shadow:var(--shadow);
+      background: var(--paper);
+      border-radius: 22px;
+      overflow: hidden;
+      border: 10px solid rgba(255,255,255,.18);
+      box-shadow: var(--shadow);
     }
 
     /* ===== Header ===== */
     .header{
-      background:var(--paper);
-      padding:18px 18px 10px;
-      border-bottom:1px solid var(--line);
-      position:relative;
+      padding: 18px 18px 14px;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+      background: #fff;
     }
 
     .topRow{
       display:flex;
-      align-items:center;
-      gap:14px;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 14px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:flex-start;
+      gap: 12px;
+      min-width:0;
     }
 
     .mark{
       width:44px;height:44px;
-      border-radius:12px;
-      background:linear-gradient(145deg, rgba(10,138,122,.14), rgba(10,138,122,.04));
+      border-radius: 12px;
       border:1px solid var(--line);
+      background: rgba(35,134,120,.10);
       display:grid; place-items:center;
       flex:0 0 auto;
     }
-
-    .mark svg{ width:22px;height:22px; opacity:.9; fill:var(--teal-2); }
-
-    .brand{
-      display:flex;
-      gap:14px;
-      align-items:flex-start;
-      min-width:0;
-    }
-
-    .divider{
-      width:2px;
-      height:46px;
-      background:linear-gradient(to bottom, rgba(30,54,55,.0), rgba(30,54,55,.35), rgba(30,54,55,.0));
-      margin-top:2px;
-      flex:0 0 auto;
-    }
+    .mark svg{ width:22px;height:22px; fill: var(--ci-bg); }
 
     .brandText{ min-width:0; }
     .brandText h1{
       margin:0;
-      font-size:28px;
-      letter-spacing:.08em;
-      line-height:1.05;
-      font-weight:900;
-      color:var(--teal-2);
-      text-transform:uppercase;
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
+      color: var(--ci-bg);
+      line-height: 1.05;
     }
     .brandText p{
-      margin:4px 0 0;
-      font-size:14px;
-      letter-spacing:.18em;
-      font-weight:700;
-      color:var(--teal);
-      text-transform:uppercase;
+      margin: 5px 0 0;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(35,134,120,.92);
     }
 
-    .priceBubbles{
-      position:absolute;
-      right:14px;
-      top:10px;
-      display:flex;
-      align-items:flex-end;
-      gap:10px;
-      pointer-events:none;
-    }
-
+    /* Right price bubble */
     .bubble{
-      border-radius:999px;
-      background:var(--teal);
+      border-radius: 999px;
+      background: var(--ci-bg);
       color:#fff;
-      padding:14px 16px;
-      box-shadow:0 14px 28px rgba(10,138,122,.25);
+      padding: 14px 16px;
       text-align:center;
-      line-height:1.05;
       border:1px solid rgba(255,255,255,.25);
+      box-shadow: 0 14px 28px rgba(0,0,0,.16);
+      min-width: 172px;
+      flex:0 0 auto;
     }
-
-    .bubble.small{
-      background:var(--teal-2);
-      padding:12px 14px;
-      opacity:.98;
-      transform:translateY(10px);
-    }
-
-    .bubble h3{
-      margin:0;
+    .bubble .t1{
       font-size:12px;
+      font-weight:900;
       letter-spacing:.12em;
       text-transform:uppercase;
-      font-weight:800;
-      opacity:.95;
+      margin:0;
     }
-
-    .bubble .sub{
+    .bubble .t2{
       margin-top:4px;
       font-size:12px;
       opacity:.92;
-      letter-spacing:.02em;
+      font-weight:700;
     }
-
     .bubble .big{
       margin-top:6px;
-      font-size:44px;
+      font-size:42px;
       font-weight:900;
       letter-spacing:.02em;
+      line-height:1;
     }
-
     .bubble .unit{
-      margin-top:3px;
+      margin-top:4px;
       font-size:12px;
+      font-weight:900;
       letter-spacing:.12em;
       text-transform:uppercase;
       opacity:.9;
-      font-weight:800;
     }
 
-    .bubbleTag{
-      margin-top:8px;
-      background:#fff;
-      color:var(--teal-2);
-      border:1px solid rgba(10,138,122,.25);
-      border-radius:999px;
-      padding:8px 10px;
-      font-weight:800;
-      font-size:11px;
-      letter-spacing:.06em;
-      text-transform:uppercase;
-      box-shadow:0 10px 22px rgba(0,0,0,.08);
-    }
-    .bubbleTag b{ color:var(--teal); }
-
-    /* Pricing strip */
-    .pricingStrip{
-      margin-top:14px;
-      display:flex;
-      gap:12px;
-      align-items:stretch;
-      border-radius:16px;
+    /* Pricing strip (optional) */
+    .strip{
+      margin-top: 14px;
+      border-radius: 16px;
       overflow:hidden;
       border:1px solid var(--line);
+      display:flex;
     }
-
-    .pricingLabel{
-      background:rgba(106,165,155,.85);
+    .stripLabel{
+      background: var(--ci-bg);
       color:#fff;
-      padding:12px 14px;
-      font-weight:900;
+      padding: 12px 14px;
+      font-weight: 900;
       letter-spacing:.10em;
       text-transform:uppercase;
-      font-size:18px;
-      display:flex; align-items:center;
-      min-width:150px;
-      justify-content:center;
+      display:flex; align-items:center; justify-content:center;
+      min-width: 150px;
     }
-
-    .pricingNotes{
-      flex:1;
-      padding:10px 14px;
+    .stripNotes{
+      padding: 10px 14px;
       display:flex;
-      gap:16px;
-      align-items:center;
+      gap: 14px;
       flex-wrap:wrap;
-      font-size:12px;
-      color:rgba(30,54,55,.85);
+      align-items:center;
+      font-size: 12px;
+      color: var(--muted);
     }
     .dot{
       width:6px;height:6px;border-radius:50%;
-      background:rgba(30,54,55,.55);
+      background: rgba(30,54,55,.55);
       display:inline-block;
       margin-right:8px;
-      transform:translateY(-1px);
+      transform: translateY(-1px);
     }
-    .noteItem{ white-space:nowrap; }
 
     /* ===== Controls ===== */
     .controls{
-      padding:14px 18px 18px;
-      border-bottom:1px solid var(--line);
+      padding: 12px 18px 16px;
+      border-bottom: 1px solid var(--line);
       display:flex;
-      gap:10px;
+      gap: 10px;
       flex-wrap:wrap;
       align-items:center;
-      background:linear-gradient(to bottom, rgba(246,241,231,.55), rgba(255,255,255,0));
-    }
-
-    .seg{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      align-items:center;
+      background: linear-gradient(to bottom, rgba(35,134,120,.08), rgba(255,255,255,0));
     }
 
     .chip{
       border:1px solid var(--line);
       background:#fff;
-      padding:9px 12px;
+      padding: 9px 12px;
       border-radius:999px;
-      font-weight:800;
-      font-size:12px;
+      font-weight:900;
+      font-size: 12px;
       letter-spacing:.06em;
       text-transform:uppercase;
       cursor:pointer;
       user-select:none;
       transition:.18s transform, .18s background, .18s border;
     }
-    .chip:hover{ transform:translateY(-1px); }
+    .chip:hover{ transform: translateY(-1px); }
     .chip.active{
-      background:rgba(10,138,122,.12);
-      border-color:rgba(10,138,122,.45);
-      color:var(--teal-2);
+      background: rgba(35,134,120,.12);
+      border-color: rgba(35,134,120,.45);
+      color: var(--ci-bg);
     }
 
     .search{
       margin-left:auto;
+      flex: 1;
+      min-width: 220px;
       display:flex;
       align-items:center;
-      gap:10px;
-      flex:1;
-      min-width:220px;
     }
     .search input{
       width:100%;
-      padding:10px 12px;
-      border-radius:12px;
+      padding: 10px 12px;
+      border-radius: 12px;
       border:1px solid var(--line);
-      font-weight:600;
+      font-weight:700;
       outline:none;
     }
 
-    /* ===== Menu grid ===== */
+    /* ===== Masonry columns (NO BLANK SPACE) ===== */
     .content{
-      padding:14px 14px 18px;
+      padding: 14px;
     }
 
-    .grid{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:12px;
+    .masonry{
+      column-count: 1;
+      column-gap: 14px;
     }
 
-    @media (min-width:860px){
-      .grid{ grid-template-columns:1fr 1fr; gap:14px; }
+    /* Tablet */
+    @media (min-width: 720px){
+      .masonry{ column-count: 2; }
+    }
+    /* Desktop: 3 columns */
+    @media (min-width: 980px){
+      .masonry{ column-count: 3; }
     }
 
     .panel{
-      border:1px solid var(--line);
-      border-radius:18px;
+      display:inline-block;
+      width:100%;
+      break-inside: avoid;
+      margin: 0 0 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
       overflow:hidden;
       background:#fff;
     }
 
+    /* Solid CI bar + white text */
     .panelHead{
-      padding:10px 12px;
-      border-bottom:1px solid var(--line);
+      background: var(--ci-bg);
+      color:#fff;
+      padding: 10px 12px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      background:linear-gradient(to right, rgba(10,138,122,.12), rgba(10,138,122,.02));
     }
     .panelHead h2{
       margin:0;
-      font-size:13px;
+      font-size: 13px;
+      font-weight: 900;
       letter-spacing:.14em;
-      font-weight:900;
       text-transform:uppercase;
-      color:rgba(30,54,55,.9);
+      color:#fff;
     }
     .panelHead .colTitle{
-      font-size:12px;
-      font-weight:800;
+      font-size: 12px;
+      font-weight: 800;
       letter-spacing:.10em;
       text-transform:uppercase;
-      color:rgba(30,54,55,.65);
+      color: rgba(255,255,255,.88);
+      white-space:nowrap;
     }
 
-    .rows{ padding:10px 12px 14px; }
+    .rows{ padding: 10px 12px 14px; }
 
     .item{
       display:grid;
-      grid-template-columns:1fr auto;
-      gap:10px;
-      padding:14px 0;
-      border-bottom:1px dashed rgba(30,54,55,.18);
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      padding: 14px 0;
+      border-bottom: 1px dashed rgba(30,54,55,.16);
     }
     .item:last-child{ border-bottom:none; }
 
     .titleLine{
       display:flex;
+      gap: 10px;
       align-items:center;
-      gap:10px;
       flex-wrap:wrap;
     }
     .name{
-      font-weight:900;
+      font-weight: 900;
+      font-size: 14px;
       letter-spacing:.02em;
       text-transform:uppercase;
-      font-size:14px;
     }
 
-    .badges{ display:flex; gap:6px; align-items:center; }
+    .badges{ display:flex; gap: 6px; }
     .badge{
-      padding:5px 9px;
-      border-radius:999px;
-      font-size:10px;
-      font-weight:900;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-      border:1px solid rgba(30,54,55,.18);
-      background:rgba(30,54,55,.04);
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      border: 1px solid rgba(30,54,55,.16);
+      background: rgba(30,54,55,.04);
+      color: rgba(30,54,55,.86);
     }
     .badge.new{
-      background:rgba(225,56,44,.12);
-      border-color:rgba(225,56,44,.28);
-      color:#a62820;
+      background: rgba(253,1,6,.10);
+      border-color: rgba(253,1,6,.24);
+      color: #b00e12;
     }
     .badge.best{
-      background:rgba(10,138,122,.12);
-      border-color:rgba(10,138,122,.30);
-      color:var(--teal-2);
+      background: rgba(35,134,120,.12);
+      border-color: rgba(35,134,120,.30);
+      color: var(--ci-bg);
     }
 
+    /* Terpene tags */
     .tags{
-      margin-top:8px;
+      margin-top: 8px;
       display:flex;
-      gap:8px;
+      gap: 8px;
       flex-wrap:wrap;
     }
     .tag{
-      font-size:11px;
-      font-weight:800;
+      font-size: 11px;
+      font-weight: 800;
       letter-spacing:.02em;
-      padding:6px 8px;
-      border-radius:8px;
-      border:1px solid rgba(30,54,55,.16);
-      background:rgba(246,241,231,.55);
-      text-transform:uppercase;
+      padding: 6px 10px;
+      border-radius: 999px;
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+
+      background: rgba(30,54,55,.06);
+      border: 1px solid rgba(30,54,55,.16);
+      color: rgba(30,54,55,.90);
+      text-transform: uppercase;
+    }
+    .tag::before{
+      content:"";
+      width:8px;height:8px;border-radius:50%;
+      background: currentColor;
+      opacity:.9;
     }
 
     .meta{
       text-align:right;
-      font-weight:900;
-      letter-spacing:.02em;
-      font-size:12px;
-      color:rgba(30,54,55,.85);
-      align-self:center;
       white-space:nowrap;
+      align-self:center;
     }
-    .meta .k{ opacity:.65; font-weight:900; letter-spacing:.12em; font-size:10px; text-transform:uppercase; }
-    .meta .v{ display:block; font-size:13px; margin-top:6px; }
+    .meta .k{
+      display:block;
+      font-size:10px;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color: rgba(30,54,55,.55);
+    }
+    .meta .v{
+      display:block;
+      margin-top:6px;
+      font-size: 13px;
+      font-weight: 900;
+      color: rgba(30,54,55,.88);
+    }
 
-    /* Mobile tighten */
+    .empty{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      background:#fff;
+    }
+    .empty .t{
+      font-weight:900;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+    .empty .d{
+      margin-top:6px;
+      color: var(--muted);
+      font-weight:700;
+      font-size: 13px;
+    }
+
+    /* Tighten on small screens */
     @media (max-width:520px){
-      .brandText h1{ font-size:22px; }
-      .bubble .big{ font-size:38px; }
-      .pricingLabel{ min-width:120px; font-size:16px; }
-      .priceBubbles{ right:10px; top:8px; }
-      .bubble{ padding:12px 14px; }
-      .bubble.small{ display:none; } /* hide extra bubble on tiny screens */
+      .brandText h1{ font-size: 22px; }
+      .bubble{ min-width: 150px; }
+      .bubble .big{ font-size: 38px; }
+      .stripLabel{ min-width: 120px; }
     }
   </style>
 </head>
 
 <body>
-  <div class="frame">
+  <div class="wrap">
     <div class="sheet">
 
-      <!-- HEADER -->
       <header class="header">
         <div class="topRow">
-          <div class="mark" aria-hidden="true">
-            <!-- simple icon -->
-            <svg viewBox="0 0 24 24" role="img" aria-label="">
-              <path d="M12 2c.4 2.4.5 4.6.3 6.6 1.7-1.3 3.8-2.3 6.3-3-1.2 2.3-3 4.2-5.1 5.6 2.2.1 4.4.6 6.5 1.6-2 1.2-4.2 1.9-6.4 2 2 1.6 3.6 3.6 4.6 6-2.6-.7-4.7-1.8-6.3-3.2.1 1.9 0 4-.4 6.4-.4-2.4-.6-4.6-.4-6.4-1.6 1.4-3.7 2.5-6.3 3.2 1-2.4 2.6-4.4 4.6-6-2.2-.1-4.4-.8-6.4-2 2.1-1 4.3-1.5 6.5-1.6C6.4 9.7 4.6 7.8 3.4 5.6c2.5.7 4.6 1.7 6.3 3C11.5 6.6 11.6 4.4 12 2z"/>
-            </svg>
-          </div>
-
           <div class="brand">
-            <div class="divider" aria-hidden="true"></div>
+            <div class="mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2c.4 2.4.5 4.6.3 6.6 1.7-1.3 3.8-2.3 6.3-3-1.2 2.3-3 4.2-5.1 5.6 2.2.1 4.4.6 6.5 1.6-2 1.2-4.2 1.9-6.4 2 2 1.6 3.6 3.6 4.6 6-2.6-.7-4.7-1.8-6.3-3.2.1 1.9 0 4-.4 6.4-.4-2.4-.6-4.6-.4-6.4-1.6 1.4-3.7 2.5-6.3 3.2 1-2.4 2.6-4.4 4.6-6-2.2-.1-4.4-.8-6.4-2 2.1-1 4.3-1.5 6.5-1.6C6.4 9.7 4.6 7.8 3.4 5.6c2.5.7 4.6 1.7 6.3 3C11.5 6.6 11.6 4.4 12 2z"/></svg>
+            </div>
             <div class="brandText">
-              <h1>TARATERA</h1>
-              <p>FLOWERS</p>
+              <h1 id="brandName">TARATERA</h1>
+              <p id="brandSub">CATALOG</p>
             </div>
           </div>
-        </div>
 
-        <!-- Right bubbles -->
-        <div class="priceBubbles" aria-hidden="true">
-          <div class="bubble small">
-            <h3>MIXED SIZE</h3>
-            <div class="sub">ONLY</div>
-          </div>
-
-          <div class="bubble">
-            <h3>PRICES</h3>
-            <div class="sub">Starting at</div>
+          <div class="bubble" aria-label="price bubble">
+            <div class="t1">PRICES</div>
+            <div class="t2">Starting at</div>
             <div class="big" id="priceStart">80.-</div>
             <div class="unit" id="priceUnit">THB</div>
-            <div class="bubbleTag" id="priceTag">• SMALLS • <b>POPCORN</b> •</div>
           </div>
         </div>
 
-        <div class="pricingStrip" role="note" aria-label="pricing notes">
-          <div class="pricingLabel">PRICING</div>
-          <div class="pricingNotes">
-            <div class="noteItem"><span class="dot"></span><span id="note1">Minimum order 5,000 THB.</span></div>
-            <div class="noteItem"><span class="dot"></span><span id="note2">Prices subject to quantity. Contact sales.</span></div>
+        <div class="strip" role="note">
+          <div class="stripLabel">PRICING</div>
+          <div class="stripNotes">
+            <div><span class="dot"></span><span id="note1">Minimum order 5,000 THB.</span></div>
+            <div><span class="dot"></span><span id="note2">Prices subject to quantity. Contact sales.</span></div>
           </div>
         </div>
       </header>
 
-      <!-- CONTROLS -->
       <section class="controls">
-        <div class="seg" id="categorySeg"></div>
+        <div id="seg"></div>
 
         <div class="search">
-          <input id="q" type="search" placeholder="Search product name or tag…" autocomplete="off">
+          <input id="q" type="search" placeholder="Search name / tag…" autocomplete="off">
         </div>
       </section>
 
-      <!-- CONTENT -->
       <main class="content">
-        <div class="grid" id="grid"></div>
+        <div class="masonry" id="masonry"></div>
       </main>
 
     </div>
   </div>
 
-<script>
-  /**
-   * IMPORTANT:
-   * This is a neutral "Product Catalog" template.
-   * Replace categories/fields with your own legal product data.
-   */
+  <script>
+    // ===== Theme / Header config =====
+    const CONFIG = {
+      brandName: "TARATERA",
+      brandSub: "FLOWERS",
+      priceStart: "80.-",
+      priceUnit: "THB",
+      note1: "Minimum order 5,000 THB.",
+      note2: "Prices subject to quantity. Contact sales."
+    };
 
-  const CONFIG = {
-    brandName: "TARATERA",
-    brandSub: "FLOWERS",
-    priceStart: "80.-",
-    priceUnit: "THB",
-    priceTag: "• SMALLS • POPCORN •",
-    note1: "Minimum order 5,000 THB.",
-    note2: "Prices subject to quantity. Contact sales."
-  };
+    // ===== Terpene colors =====
+    const TERPENE_COLORS = {
+      MYRCENE: "#2b398c",
+      CARYOPHYLLENE: "#77823d",
+      HUMULENE: "#fd8b03",
+      LIMONENE: "#7bc70f",
+      OCIMENE: "#009282",
+      PHELLANDRENE: "#fd0106",
+      PINENE: "#08a152",
+      TERPINOLENE: "#4b5e3d",
+      TERPINEOL: "#ee5a29",
+      LINALOOL: "#9094d8",
+      BISABOLOL: "#e6c122",
+    };
 
-  // ===== DATA: edit here =====
-  const DATA = [
-    {
-      category: "CATEGORY A",
-      rightColTitle: "DETAIL %",     // column header (like %THC/CBD)
-      items: [
-        {
-          name: "PINEAPPLE XPRESS 2.0",
-          badges: ["BEST"],
-          tags: ["NOTE: MUSK", "NOTE: PINE"],
-          meta: { a: "32–35%", b: "1–2%" }  // show two lines
-        },
-        {
-          name: "TROP CHERRY GAS #14",
-          badges: ["BEST"],
-          tags: ["NOTE: MUSK", "NOTE: CITRUS"],
-          meta: { a: "20–22%", b: "0%" }
-        },
-        {
-          name: "LEMON UPZ",
-          badges: ["NEW"],
-          tags: ["NOTE: LEMON", "NOTE: PEPPER"],
-          meta: { a: "24–28%", b: "0%" }
-        },
-      ]
-    },
-    {
-      category: "CATEGORY B",
-      rightColTitle: "DETAIL %",
-      items: [
-        {
-          name: "CASHEW SUNDAE",
-          badges: ["BEST"],
-          tags: ["NOTE: NUTTY", "NOTE: EARTHY"],
-          meta: { a: "20–24%", b: "<1%" }
-        },
-        {
-          name: "BLACK GARLIC",
-          badges: ["NEW"],
-          tags: ["NOTE: EARTHY", "NOTE: WOOD"],
-          meta: { a: "23–27%", b: "<1%" }
-        }
-      ]
-    },
-    {
-      category: "CATEGORY C",
-      rightColTitle: "DETAIL %",
-      items: [
-        {
-          name: "CAP JUNKY",
-          badges: ["NEW"],
-          tags: ["NOTE: FRUITS", "NOTE: PEPPER"],
-          meta: { a: "23–27%", b: "<1%" }
-        },
-        {
-          name: "OREOZ",
-          badges: [],
-          tags: ["NOTE: EARTHY", "NOTE: FRUIT"],
-          meta: { a: "20–24%", b: "0%" }
-        }
-      ]
+    // ===== DATA (แก้ตรงนี้อย่างเดียวก็พอ) =====
+    const DATA = [
+      {
+        category: "SATIVA",
+        rightColTitle: "% A / B",
+        items: [
+          { name:"PINEAPPLE XPRESS 2.0", badges:["BEST"], tags:["MYRCENE (MUSK)", "PINENE (PINE)"], meta:{a:"32–35%", b:"1–2%"} },
+          { name:"TROP CHERRY GAS #14", badges:["BEST"], tags:["MYRCENE (MUSK)", "LIMONENE (CITRUS)"], meta:{a:"20–22%", b:"0%"} },
+          { name:"LEMON UPZ", badges:["NEW"], tags:["LIMONENE (LEMON)", "CARYOPHYLLENE (PEPPER)"], meta:{a:"24–28%", b:"0%"} },
+          { name:"MANGO SUNSET HAZE", badges:[], tags:["MYRCENE (MANGO)", "LIMONENE (LEMON)"], meta:{a:"20–24%", b:"0%"} },
+        ]
+      },
+      {
+        category: "INDICA",
+        rightColTitle: "% A / B",
+        items: [
+          { name:"CASHEW SUNDAE", badges:["BEST"], tags:["BISABOLOL (NUTTY)", "CARYOPHYLLENE (EARTHY)"], meta:{a:"20–24%", b:"<1%"} },
+          { name:"BLACK GARLIC", badges:["NEW"], tags:["MYRCENE (EARTHY)", "HUMULENE (WOOD)"], meta:{a:"23–27%", b:"<1%"} },
+          { name:"RANCID RUNTZ", badges:["NEW"], tags:["CARYOPHYLLENE (GAS)", "LINALOOL (FRUITS)"], meta:{a:"28–31%", b:"<1%"} },
+        ]
+      },
+      {
+        category: "HYBRID",
+        rightColTitle: "% A / B",
+        items: [
+          { name:"CAP JUNKY", badges:["NEW"], tags:["LIMONENE (FRUITS)", "CARYOPHYLLENE (PEPPER)"], meta:{a:"23–27%", b:"<1%"} },
+          { name:"OREOZ", badges:[], tags:["CARYOPHYLLENE (EARTHY)", "MYRCENE (FRUIT)"], meta:{a:"20–24%", b:"0%"} },
+        ]
+      },
+      // เพิ่ม panel ได้อีกเรื่อย ๆ (3 คอลัมน์จะจัดให้แน่นเอง)
+    ];
+
+    // ===== DOM =====
+    const el = {
+      brandName: document.getElementById("brandName"),
+      brandSub: document.getElementById("brandSub"),
+      priceStart: document.getElementById("priceStart"),
+      priceUnit: document.getElementById("priceUnit"),
+      note1: document.getElementById("note1"),
+      note2: document.getElementById("note2"),
+      seg: document.getElementById("seg"),
+      q: document.getElementById("q"),
+      masonry: document.getElementById("masonry"),
+    };
+
+    // apply config
+    el.brandName.textContent = CONFIG.brandName;
+    el.brandSub.textContent  = CONFIG.brandSub;
+    el.priceStart.textContent = CONFIG.priceStart;
+    el.priceUnit.textContent = CONFIG.priceUnit;
+    el.note1.textContent = CONFIG.note1;
+    el.note2.textContent = CONFIG.note2;
+
+    let active = "ALL";
+
+    const categories = ["ALL", ...DATA.map(d => d.category)];
+
+    function escapeHtml(s){
+      return String(s ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
     }
-  ];
 
-  // ===== Render =====
-  const els = {
-    grid: document.getElementById("grid"),
-    seg: document.getElementById("categorySeg"),
-    q: document.getElementById("q"),
-    priceStart: document.getElementById("priceStart"),
-    priceUnit: document.getElementById("priceUnit"),
-    priceTag: document.getElementById("priceTag"),
-    note1: document.getElementById("note1"),
-    note2: document.getElementById("note2"),
-  };
+    function terpeneTagHtml(text){
+      const raw = String(text || "").trim();
+      const key = raw.split("(")[0].trim().toUpperCase();
+      const color = TERPENE_COLORS[key];
+      if(!color){
+        return `<span class="tag">${escapeHtml(raw)}</span>`;
+      }
+      // ใช้สีอ่อน ๆ เป็นพื้น + สีหลักเป็นตัวหนังสือ (ดู premium)
+      return `
+        <span class="tag" style="
+          color:${color};
+          background: color-mix(in srgb, ${color} 14%, white);
+          border-color: color-mix(in srgb, ${color} 34%, transparent);
+        ">
+          ${escapeHtml(raw)}
+        </span>
+      `;
+    }
 
-  // apply config
-  els.priceStart.textContent = CONFIG.priceStart;
-  els.priceUnit.textContent = CONFIG.priceUnit;
-  els.priceTag.textContent = CONFIG.priceTag;
-  els.note1.textContent = CONFIG.note1;
-  els.note2.textContent = CONFIG.note2;
-
-  let activeCategory = "ALL";
-
-  const categories = ["ALL", ...DATA.map(d => d.category)];
-
-  function renderSeg(){
-    els.seg.innerHTML = categories.map(c => {
-      const active = c === activeCategory ? "active" : "";
-      return `<button class="chip ${active}" data-cat="${escapeHtml(c)}" type="button">${escapeHtml(c)}</button>`;
-    }).join("");
-    els.seg.querySelectorAll("button").forEach(btn=>{
-      btn.addEventListener("click", ()=>{
-        activeCategory = btn.dataset.cat;
-        renderSeg();
-        renderGrid();
-      });
-    });
-  }
-
-  function renderGrid(){
-    const query = (els.q.value || "").trim().toLowerCase();
-
-    const panels = DATA
-      .filter(p => activeCategory === "ALL" ? true : p.category === activeCategory)
-      .map(p => {
-        const items = p.items.filter(it => {
-          if (!query) return true;
-          const hay = [
-            it.name,
-            ...(it.tags || []),
-            ...(it.badges || []),
-            it.meta?.a, it.meta?.b
-          ].join(" ").toLowerCase();
-          return hay.includes(query);
-        });
-
-        if (!items.length) return "";
-
-        return `
-          <section class="panel">
-            <div class="panelHead">
-              <h2>${escapeHtml(p.category)}</h2>
-              <div class="colTitle">${escapeHtml(p.rightColTitle || "")}</div>
-            </div>
-            <div class="rows">
-              ${items.map(renderItem).join("")}
-            </div>
-          </section>
-        `;
+    function renderSeg(){
+      el.seg.innerHTML = categories.map(c=>{
+        const cls = (c === active) ? "chip active" : "chip";
+        return `<button type="button" class="${cls}" data-cat="${escapeHtml(c)}">${escapeHtml(c)}</button>`;
       }).join("");
 
-    els.grid.innerHTML = panels || emptyState();
-  }
+      el.seg.querySelectorAll("button").forEach(btn=>{
+        btn.addEventListener("click", ()=>{
+          active = btn.dataset.cat;
+          renderSeg();
+          renderPanels();
+        });
+      });
+    }
 
-  function renderItem(it){
-    const badges = (it.badges || []).map(b=>{
-      const cls = (b === "NEW") ? "new" : (b === "BEST" ? "best" : "");
-      const label = (b === "BEST") ? "BEST SELLER" : b;
-      return `<span class="badge ${cls}">${escapeHtml(label)}</span>`;
-    }).join("");
+    function renderItem(it){
+      const badges = (it.badges||[]).map(b=>{
+        const norm = String(b).toUpperCase();
+        const cls = (norm==="NEW") ? "badge new" : (norm==="BEST" ? "badge best" : "badge");
+        const label = (norm==="BEST") ? "BEST SELLER" : norm;
+        return `<span class="${cls}">${escapeHtml(label)}</span>`;
+      }).join("");
 
-    const tags = (it.tags || []).map(t => `<span class="tag">${escapeHtml(t)}</span>`).join("");
+      const tags = (it.tags||[]).map(t => terpeneTagHtml(t)).join("");
 
-    const metaA = it.meta?.a ? `<span class="k">A</span><span class="v">${escapeHtml(it.meta.a)}</span>` : "";
-    const metaB = it.meta?.b ? `<span class="k">B</span><span class="v">${escapeHtml(it.meta.b)}</span>` : "";
+      const metaA = it.meta?.a ? `<span class="k">A</span><span class="v">${escapeHtml(it.meta.a)}</span>` : "";
+      const metaB = it.meta?.b ? `<span class="k">B</span><span class="v">${escapeHtml(it.meta.b)}</span>` : "";
 
-    return `
-      <article class="item">
-        <div>
-          <div class="titleLine">
-            <div class="name">${escapeHtml(it.name)}</div>
-            <div class="badges">${badges}</div>
+      return `
+        <article class="item">
+          <div>
+            <div class="titleLine">
+              <div class="name">${escapeHtml(it.name)}</div>
+              <div class="badges">${badges}</div>
+            </div>
+            <div class="tags">${tags}</div>
           </div>
-          <div class="tags">${tags}</div>
+          <div class="meta">
+            ${metaA}
+            ${metaB ? `<div style="height:10px"></div>${metaB}` : ""}
+          </div>
+        </article>
+      `;
+    }
+
+    function emptyState(){
+      return `
+        <div class="empty">
+          <div class="t">No results</div>
+          <div class="d">Try another search or switch category.</div>
         </div>
-        <div class="meta">
-          ${metaA}
-          ${metaB ? `<div style="height:10px"></div>${metaB}` : ""}
-        </div>
-      </article>
-    `;
-  }
+      `;
+    }
 
-  function emptyState(){
-    return `
-      <div style="padding:18px; border:1px solid var(--line); border-radius:18px; background:#fff;">
-        <div style="font-weight:900; letter-spacing:.06em; text-transform:uppercase;">No results</div>
-        <div style="margin-top:6px; color:rgba(30,54,55,.75); font-weight:600;">
-          Try a different search term or switch category.
-        </div>
-      </div>
-    `;
-  }
+    function renderPanels(){
+      const q = (el.q.value || "").trim().toLowerCase();
 
-  function escapeHtml(s){
-    return String(s ?? "")
-      .replaceAll("&","&amp;")
-      .replaceAll("<","&lt;")
-      .replaceAll(">","&gt;")
-      .replaceAll('"',"&quot;")
-      .replaceAll("'","&#039;");
-  }
+      const panels = DATA
+        .filter(p => active === "ALL" ? true : p.category === active)
+        .map(p=>{
+          const items = (p.items||[]).filter(it=>{
+            if(!q) return true;
+            const hay = [
+              it.name,
+              ...(it.badges||[]),
+              ...(it.tags||[]),
+              it.meta?.a, it.meta?.b
+            ].join(" ").toLowerCase();
+            return hay.includes(q);
+          });
 
-  els.q.addEventListener("input", renderGrid);
+          if(!items.length) return "";
 
-  renderSeg();
-  renderGrid();
-</script>
+          return `
+            <section class="panel">
+              <div class="panelHead">
+                <h2>${escapeHtml(p.category)}</h2>
+                <div class="colTitle">${escapeHtml(p.rightColTitle || "")}</div>
+              </div>
+              <div class="rows">
+                ${items.map(renderItem).join("")}
+              </div>
+            </section>
+          `;
+        }).join("");
+
+      el.masonry.innerHTML = panels || emptyState();
+    }
+
+    el.q.addEventListener("input", renderPanels);
+
+    renderSeg();
+    renderPanels();
+  </script>
 </body>
 </html>
