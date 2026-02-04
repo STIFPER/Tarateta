@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
-  <title>Catalog Menu</title>
+  <title>Catalog Layout (3-Column Masonry)</title>
 
   <!-- Montserrat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,9 +32,8 @@
       background: var(--ci-bg);
     }
 
-    /* Outer frame */
     .wrap{
-      max-width: 1080px;
+      max-width: 1120px;
       margin: 0 auto;
       padding: 14px;
     }
@@ -101,7 +100,7 @@
       color: rgba(35,134,120,.92);
     }
 
-    /* Right price bubble */
+    /* Price bubble (optional) */
     .bubble{
       border-radius: 999px;
       background: var(--ci-bg);
@@ -142,7 +141,7 @@
       opacity:.9;
     }
 
-    /* Pricing strip (optional) */
+    /* Pricing strip */
     .strip{
       margin-top: 14px;
       border-radius: 16px;
@@ -224,7 +223,7 @@
       outline:none;
     }
 
-    /* ===== Masonry columns (NO BLANK SPACE) ===== */
+    /* ===== 3-column Masonry (dense) ===== */
     .content{
       padding: 14px;
     }
@@ -233,12 +232,9 @@
       column-count: 1;
       column-gap: 14px;
     }
-
-    /* Tablet */
     @media (min-width: 720px){
       .masonry{ column-count: 2; }
     }
-    /* Desktop: 3 columns */
     @media (min-width: 980px){
       .masonry{ column-count: 3; }
     }
@@ -291,40 +287,52 @@
     }
     .item:last-child{ border-bottom:none; }
 
+    /* ===== Prefix badges BEFORE name ===== */
     .titleLine{
       display:flex;
-      gap: 10px;
       align-items:center;
+      gap:10px;
       flex-wrap:wrap;
     }
+    .badges{
+      display:flex;
+      gap:6px;
+      align-items:center;
+    }
+    .badge{
+      height:22px;
+      padding:0 10px;
+      border-radius:999px;
+      display:inline-flex;
+      align-items:center;
+
+      font-size:10px;
+      font-weight:900;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+
+      border:1px solid rgba(255,255,255,.22);
+      background: var(--ci-bg);
+      color:#fff;
+    }
+    .badge.best{
+      box-shadow: 0 10px 22px rgba(35,134,120,.22);
+    }
+    .badge.new{
+      background:#fff;
+      color: var(--ci-bg);
+      border:1px solid rgba(35,134,120,.45);
+    }
+    .badge.reco{
+      background: rgba(35,134,120,.92);
+      border-color: rgba(255,255,255,.18);
+    }
+
     .name{
       font-weight: 900;
       font-size: 14px;
       letter-spacing:.02em;
       text-transform:uppercase;
-    }
-
-    .badges{ display:flex; gap: 6px; }
-    .badge{
-      padding: 5px 9px;
-      border-radius: 999px;
-      font-size: 10px;
-      font-weight: 900;
-      letter-spacing: .10em;
-      text-transform: uppercase;
-      border: 1px solid rgba(30,54,55,.16);
-      background: rgba(30,54,55,.04);
-      color: rgba(30,54,55,.86);
-    }
-    .badge.new{
-      background: rgba(253,1,6,.10);
-      border-color: rgba(253,1,6,.24);
-      color: #b00e12;
-    }
-    .badge.best{
-      background: rgba(35,134,120,.12);
-      border-color: rgba(35,134,120,.30);
-      color: var(--ci-bg);
     }
 
     /* Terpene tags */
@@ -395,7 +403,6 @@
       font-size: 13px;
     }
 
-    /* Tighten on small screens */
     @media (max-width:520px){
       .brandText h1{ font-size: 22px; }
       .bubble{ min-width: 150px; }
@@ -413,7 +420,9 @@
         <div class="topRow">
           <div class="brand">
             <div class="mark" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M12 2c.4 2.4.5 4.6.3 6.6 1.7-1.3 3.8-2.3 6.3-3-1.2 2.3-3 4.2-5.1 5.6 2.2.1 4.4.6 6.5 1.6-2 1.2-4.2 1.9-6.4 2 2 1.6 3.6 3.6 4.6 6-2.6-.7-4.7-1.8-6.3-3.2.1 1.9 0 4-.4 6.4-.4-2.4-.6-4.6-.4-6.4-1.6 1.4-3.7 2.5-6.3 3.2 1-2.4 2.6-4.4 4.6-6-2.2-.1-4.4-.8-6.4-2 2.1-1 4.3-1.5 6.5-1.6C6.4 9.7 4.6 7.8 3.4 5.6c2.5.7 4.6 1.7 6.3 3C11.5 6.6 11.6 4.4 12 2z"/></svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 2c.4 2.4.5 4.6.3 6.6 1.7-1.3 3.8-2.3 6.3-3-1.2 2.3-3 4.2-5.1 5.6 2.2.1 4.4.6 6.5 1.6-2 1.2-4.2 1.9-6.4 2 2 1.6 3.6 3.6 4.6 6-2.6-.7-4.7-1.8-6.3-3.2.1 1.9 0 4-.4 6.4-.4-2.4-.6-4.6-.4-6.4-1.6 1.4-3.7 2.5-6.3 3.2 1-2.4 2.6-4.4 4.6-6-2.2-.1-4.4-.8-6.4-2 2.1-1 4.3-1.5 6.5-1.6C6.4 9.7 4.6 7.8 3.4 5.6c2.5.7 4.6 1.7 6.3 3C11.5 6.6 11.6 4.4 12 2z"/>
+              </svg>
             </div>
             <div class="brandText">
               <h1 id="brandName">TARATERA</h1>
@@ -433,7 +442,7 @@
           <div class="stripLabel">PRICING</div>
           <div class="stripNotes">
             <div><span class="dot"></span><span id="note1">Minimum order 5,000 THB.</span></div>
-            <div><span class="dot"></span><span id="note2">Prices subject to quantity. Contact sales.</span></div>
+            <div><span class="dot"></span><span id="note2">Prices subject to quantity.</span></div>
           </div>
         </div>
       </header>
@@ -454,17 +463,17 @@
   </div>
 
   <script>
-    // ===== Theme / Header config =====
+    // ===== Theme config =====
     const CONFIG = {
       brandName: "TARATERA",
       brandSub: "FLOWERS",
       priceStart: "80.-",
       priceUnit: "THB",
       note1: "Minimum order 5,000 THB.",
-      note2: "Prices subject to quantity. Contact sales."
+      note2: "Prices subject to quantity."
     };
 
-    // ===== Terpene colors =====
+    // ===== Terpene colors (your mapping) =====
     const TERPENE_COLORS = {
       MYRCENE: "#2b398c",
       CARYOPHYLLENE: "#77823d",
@@ -479,36 +488,45 @@
       BISABOLOL: "#e6c122",
     };
 
-    // ===== DATA (แก้ตรงนี้อย่างเดียวก็พอ) =====
+    // ===== Demo DATA (replace later) =====
     const DATA = [
       {
         category: "SATIVA",
-        rightColTitle: "% A / B",
+        rightColTitle: "A / B",
         items: [
-          { name:"PINEAPPLE XPRESS 2.0", badges:["BEST"], tags:["MYRCENE (MUSK)", "PINENE (PINE)"], meta:{a:"32–35%", b:"1–2%"} },
-          { name:"TROP CHERRY GAS #14", badges:["BEST"], tags:["MYRCENE (MUSK)", "LIMONENE (CITRUS)"], meta:{a:"20–22%", b:"0%"} },
-          { name:"LEMON UPZ", badges:["NEW"], tags:["LIMONENE (LEMON)", "CARYOPHYLLENE (PEPPER)"], meta:{a:"24–28%", b:"0%"} },
-          { name:"MANGO SUNSET HAZE", badges:[], tags:["MYRCENE (MANGO)", "LIMONENE (LEMON)"], meta:{a:"20–24%", b:"0%"} },
+          { name:"PINEAPPLE XPRESS 2.0", badges:["BEST"], tags:["MYRCENE (CITRUS)", "PINENE (FLORAL)"], meta:{a:"32–35%", b:"1–2%"} },
+          { name:"LEMON UPZ", badges:["NEW"], tags:["LIMONENE (CITRUS)", "CARYOPHYLLENE (FRUIT)"], meta:{a:"24–28%", b:"0%"} },
+          { name:"TROP CHERRY GAS #14", badges:["BEST","RECOMMENDED"], tags:["MYRCENE (FRUIT)", "OCIMENE (FLORAL)"], meta:{a:"20–22%", b:"0%"} },
+          { name:"SUNRISE SPLASH", badges:[], tags:["TERPINOLENE (CITRUS)", "PINENE (FLORAL)"], meta:{a:"19–23%", b:"0%"} },
         ]
       },
       {
         category: "INDICA",
-        rightColTitle: "% A / B",
+        rightColTitle: "A / B",
         items: [
-          { name:"CASHEW SUNDAE", badges:["BEST"], tags:["BISABOLOL (NUTTY)", "CARYOPHYLLENE (EARTHY)"], meta:{a:"20–24%", b:"<1%"} },
-          { name:"BLACK GARLIC", badges:["NEW"], tags:["MYRCENE (EARTHY)", "HUMULENE (WOOD)"], meta:{a:"23–27%", b:"<1%"} },
-          { name:"RANCID RUNTZ", badges:["NEW"], tags:["CARYOPHYLLENE (GAS)", "LINALOOL (FRUITS)"], meta:{a:"28–31%", b:"<1%"} },
+          { name:"CASHEW SUNDAE", badges:["BEST"], tags:["BISABOLOL (FRUIT)", "HUMULENE (FLORAL)"], meta:{a:"20–24%", b:"<1%"} },
+          { name:"BLACK GARLIC", badges:["NEW"], tags:["MYRCENE (FLORAL)", "HUMULENE (CITRUS)"], meta:{a:"23–27%", b:"<1%"} },
+          { name:"MIDNIGHT SILK", badges:["RECOMMENDED"], tags:["LINALOOL (FLORAL)", "CARYOPHYLLENE (FRUIT)"], meta:{a:"18–21%", b:"<1%"} },
         ]
       },
       {
         category: "HYBRID",
-        rightColTitle: "% A / B",
+        rightColTitle: "A / B",
         items: [
-          { name:"CAP JUNKY", badges:["NEW"], tags:["LIMONENE (FRUITS)", "CARYOPHYLLENE (PEPPER)"], meta:{a:"23–27%", b:"<1%"} },
-          { name:"OREOZ", badges:[], tags:["CARYOPHYLLENE (EARTHY)", "MYRCENE (FRUIT)"], meta:{a:"20–24%", b:"0%"} },
+          { name:"CAP JUNKY", badges:["NEW"], tags:["LIMONENE (FRUIT)", "CARYOPHYLLENE (FLORAL)"], meta:{a:"23–27%", b:"<1%"} },
+          { name:"OREOZ", badges:["RECOMMENDED"], tags:["CARYOPHYLLENE (FRUIT)", "MYRCENE (CITRUS)"], meta:{a:"20–24%", b:"0%"} },
         ]
       },
-      // เพิ่ม panel ได้อีกเรื่อย ๆ (3 คอลัมน์จะจัดให้แน่นเอง)
+      /* เพิ่ม panel เพื่อดู 3 คอลัมน์แน่น ๆ */
+      {
+        category: "SPECIALS",
+        rightColTitle: "A / B",
+        items: [
+          { name:"WEEKLY PICK 01", badges:["BEST"], tags:["PHELLANDRENE (FRUIT)", "OCIMENE (FLORAL)"], meta:{a:"25–29%", b:"0%"} },
+          { name:"WEEKLY PICK 02", badges:["NEW"], tags:["TERPINEOL (CITRUS)", "PINENE (FLORAL)"], meta:{a:"21–24%", b:"0%"} },
+          { name:"WEEKLY PICK 03", badges:["RECOMMENDED"], tags:["MYRCENE (FRUIT)", "LINALOOL (FLORAL)"], meta:{a:"19–22%", b:"<1%"} },
+        ]
+      },
     ];
 
     // ===== DOM =====
@@ -533,7 +551,6 @@
     el.note2.textContent = CONFIG.note2;
 
     let active = "ALL";
-
     const categories = ["ALL", ...DATA.map(d => d.category)];
 
     function escapeHtml(s){
@@ -549,10 +566,11 @@
       const raw = String(text || "").trim();
       const key = raw.split("(")[0].trim().toUpperCase();
       const color = TERPENE_COLORS[key];
+
       if(!color){
         return `<span class="tag">${escapeHtml(raw)}</span>`;
       }
-      // ใช้สีอ่อน ๆ เป็นพื้น + สีหลักเป็นตัวหนังสือ (ดู premium)
+
       return `
         <span class="tag" style="
           color:${color};
@@ -562,6 +580,18 @@
           ${escapeHtml(raw)}
         </span>
       `;
+    }
+
+    function badgeHtml(b){
+      const norm = String(b || "").toUpperCase().trim();
+      if(!norm) return "";
+
+      // เข้าธีม: BEST / RECOMMENDED = ทึบ CI, NEW = outline CI
+      if(norm === "BEST") return `<span class="badge best">BEST SELLER</span>`;
+      if(norm === "RECOMMENDED") return `<span class="badge reco">RECOMMENDED</span>`;
+      if(norm === "NEW") return `<span class="badge new">NEW</span>`;
+
+      return `<span class="badge">${escapeHtml(norm)}</span>`;
     }
 
     function renderSeg(){
@@ -580,14 +610,10 @@
     }
 
     function renderItem(it){
-      const badges = (it.badges||[]).map(b=>{
-        const norm = String(b).toUpperCase();
-        const cls = (norm==="NEW") ? "badge new" : (norm==="BEST" ? "badge best" : "badge");
-        const label = (norm==="BEST") ? "BEST SELLER" : norm;
-        return `<span class="${cls}">${escapeHtml(label)}</span>`;
-      }).join("");
+      const badgeList = (it.badges || []).slice(0, 2); // กันรก: ไม่เกิน 2 ป้าย
+      const badges = badgeList.map(badgeHtml).join("");
 
-      const tags = (it.tags||[]).map(t => terpeneTagHtml(t)).join("");
+      const tags = (it.tags || []).map(terpeneTagHtml).join("");
 
       const metaA = it.meta?.a ? `<span class="k">A</span><span class="v">${escapeHtml(it.meta.a)}</span>` : "";
       const metaB = it.meta?.b ? `<span class="k">B</span><span class="v">${escapeHtml(it.meta.b)}</span>` : "";
@@ -596,11 +622,12 @@
         <article class="item">
           <div>
             <div class="titleLine">
-              <div class="name">${escapeHtml(it.name)}</div>
               <div class="badges">${badges}</div>
+              <div class="name">${escapeHtml(it.name)}</div>
             </div>
             <div class="tags">${tags}</div>
           </div>
+
           <div class="meta">
             ${metaA}
             ${metaB ? `<div style="height:10px"></div>${metaB}` : ""}
@@ -624,7 +651,7 @@
       const panels = DATA
         .filter(p => active === "ALL" ? true : p.category === active)
         .map(p=>{
-          const items = (p.items||[]).filter(it=>{
+          const items = (p.items || []).filter(it=>{
             if(!q) return true;
             const hay = [
               it.name,
