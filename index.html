@@ -3,79 +3,126 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Item Layout</title>
+  <title>3 Sections Layout</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
-    :root{ --ci:#238678; }
+    :root{
+      --ci:#238678;
+      --paper:#fff;
+      --ink:#1e3637;
+      --line: rgba(0,0,0,.10);
+      --soft: rgba(0,0,0,.06);
+    }
 
+    *{ box-sizing:border-box; }
     body{
       margin:0;
       font-family: Montserrat, system-ui, sans-serif;
-      background:#f6f6f6;
-      padding:24px;
+      background: var(--ci);
+      padding: 18px;
+      color: var(--ink);
     }
 
-    .card{
-      max-width: 980px;
+    .sheet{
+      max-width: 1100px;
       margin: 0 auto;
-      background:#fff;
-      border-radius:18px;
-      border:1px solid rgba(0,0,0,.08);
-      box-shadow: 0 16px 36px rgba(0,0,0,.08);
-      padding:20px;
+      background: var(--paper);
+      border-radius: 22px;
+      border: 10px solid rgba(255,255,255,.18);
+      box-shadow: 0 18px 42px rgba(0,0,0,.12);
+      overflow:hidden;
     }
 
-    /* ===== The layout ===== */
+    /* ===== 3 panels stacked ===== */
+    .panel{
+      border-top: 1px solid var(--soft);
+    }
+    .panel:first-child{ border-top: 0; }
+
+    .panelHead{
+      background: var(--ci);
+      color:#fff;
+      padding: 14px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+    }
+    .panelHead .title{
+      font-weight:900;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size: 18px;
+    }
+    .panelHead .right{
+      font-weight:800;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size: 12px;
+      opacity:.9;
+      white-space:nowrap;
+    }
+
+    .panelBody{
+      padding: 16px 18px;
+      display:flex;
+      flex-direction:column;
+      gap: 14px;
+    }
+
+    /* ===== Each item row (your layout) ===== */
     .item{
       display:grid;
-      grid-template-columns: 96px 1fr 180px; /* left / center / right */
-      gap:18px;
+      grid-template-columns: 96px 1fr 170px;
+      gap: 16px;
       align-items:center;
+      padding: 12px 0;
+      border-bottom: 1px dashed rgba(0,0,0,.12);
     }
+    .item:last-child{ border-bottom:0; padding-bottom:0; }
 
-    /* LEFT badge */
+    /* Left badge */
     .badge{
       display:flex;
       flex-direction:column;
       align-items:center;
-      gap:10px;
-      color:var(--ci);
+      gap: 8px;
+      color: var(--ci);
     }
     .badgeIcon{
-      width:52px;height:52px;
-      border-radius:999px;
-      border:3px solid var(--ci);
+      width: 50px; height: 50px;
+      border-radius: 999px;
+      border: 3px solid var(--ci);
       display:grid;
       place-items:center;
-      font-weight:900;
+      font-weight: 900;
+      font-size: 14px;
       letter-spacing:.08em;
-      font-size:14px;
       line-height:1;
     }
     .badgeText{
       text-transform:uppercase;
-      font-weight:900;
+      font-weight: 900;
       letter-spacing:.08em;
-      font-size:12px;
+      font-size: 11px;
       text-align:center;
-      line-height:1.05;
+      line-height: 1.05;
     }
 
-    /* CENTER name + bars */
+    /* Center */
     .main{ min-width:0; }
-
     .name{
-      color:var(--ci);
-      font-weight:900;
+      color: var(--ci);
+      font-weight: 900;
       letter-spacing:.02em;
       text-transform:uppercase;
-      font-size:28px;
-      line-height:1.05;
-      margin:0 0 12px;
+      font-size: 22px;
+      line-height: 1.05;
+      margin: 0 0 10px;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
@@ -84,31 +131,32 @@
     .bars{
       display:flex;
       flex-direction:column;
-      gap:8px;
-      width:max-content;
-      max-width:100%;
+      gap: 8px;
+      width: max-content;
+      max-width: 100%;
     }
     .bar{
       background: var(--bg, #2b398c);
       color:#fff;
-      font-weight:900;
+      font-weight: 900;
       text-transform:uppercase;
       letter-spacing:.06em;
-      font-size:14px;
-      padding:8px 12px;
-      border-radius:3px; /* แถบเหลี่ยมคล้ายภาพ */
-      line-height:1;
+      font-size: 13px;
+      padding: 8px 12px;
+      border-radius: 3px;
+      line-height: 1;
     }
 
-    /* RIGHT meta */
+    /* Right meta */
     .meta{
       justify-self:end;
       text-align:left;
-      color:var(--ci);
-      font-weight:900;
+      color: var(--ci);
+      font-weight: 900;
       text-transform:uppercase;
-      font-size:20px;
-      line-height:1.35;
+      font-size: 18px;
+      line-height: 1.35;
+      white-space:nowrap;
     }
     .meta .k, .meta .v{
       text-decoration: underline;
@@ -116,54 +164,206 @@
       text-underline-offset: 5px;
     }
 
-    /* Mobile */
-    @media (max-width: 680px){
+    /* Responsive */
+    @media (max-width: 720px){
+      body{ padding: 12px; }
+      .panelHead{ padding: 12px 14px; }
+      .panelBody{ padding: 14px; }
+
       .item{
         grid-template-columns: 82px 1fr;
         grid-template-areas:
           "badge main"
           "badge meta";
         align-items:start;
+        gap: 14px;
       }
       .badge{ grid-area: badge; }
       .main{ grid-area: main; }
       .meta{
         grid-area: meta;
         justify-self:start;
-        margin-top:10px;
-        font-size:18px;
+        margin-top: 8px;
+        font-size: 16px;
       }
-      .name{ font-size:22px; }
+      .name{ font-size: 18px; }
     }
   </style>
 </head>
 
 <body>
-  <div class="card">
-    <div class="item">
+  <div class="sheet">
 
-      <!-- LEFT -->
-      <div class="badge">
-        <div class="badgeIcon">★</div>
-        <div class="badgeText">BEST<br>SELLER</div>
+    <!-- SATIVA -->
+    <section class="panel">
+      <div class="panelHead">
+        <div class="title">SATIVA</div>
+        <div class="right">A / B</div>
       </div>
 
-      <!-- CENTER -->
-      <div class="main">
-        <div class="name">ITEM NAME #14</div>
-        <div class="bars">
-          <div class="bar" style="--bg:#2b398c;">TAG ONE (MUSK)</div>
-          <div class="bar" style="--bg:#7bc70f;">TAG TWO (CITRUS)</div>
+      <div class="panelBody">
+        <div class="item">
+          <div class="badge">
+            <div class="badgeIcon">★</div>
+            <div class="badgeText">BEST<br>SELLER</div>
+          </div>
+
+          <div class="main">
+            <div class="name">ITEM NAME #14</div>
+            <div class="bars">
+              <div class="bar" style="--bg:#2b398c;">MYRCENE (MUSK)</div>
+              <div class="bar" style="--bg:#7bc70f;">LIMONENE (CITRUS)</div>
+            </div>
+          </div>
+
+          <div class="meta">
+            <div><span class="k">A</span> : <span class="v">20–22%</span></div>
+            <div><span class="k">B</span> : <span class="v">0%</span></div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="badge">
+            <div class="badgeIcon">●</div>
+            <div class="badgeText">RECO<br>PICK</div>
+          </div>
+
+          <div class="main">
+            <div class="name">ITEM NAME #02</div>
+            <div class="bars">
+              <div class="bar" style="--bg:#08a152;">PINENE (PINE)</div>
+              <div class="bar" style="--bg:#009282;">OCIMENE (FLORAL)</div>
+            </div>
+          </div>
+
+          <div class="meta">
+            <div><span class="k">A</span> : <span class="v">18–21%</span></div>
+            <div><span class="k">B</span> : <span class="v">&lt;1%</span></div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="badge">
+            <div class="badgeIcon">N</div>
+            <div class="badgeText">NEW<br>DROP</div>
+          </div>
+
+          <div class="main">
+            <div class="name">ITEM NAME #03</div>
+            <div class="bars">
+              <div class="bar" style="--bg:#4b5e3d;">TERPINOLENE (HERB)</div>
+              <div class="bar" style="--bg:#ee5a29;">TERPINEOL (CITRUS)</div>
+            </div>
+          </div>
+
+          <div class="meta">
+            <div><span class="k">A</span> : <span class="v">22–25%</span></div>
+            <div><span class="k">B</span> : <span class="v">0%</span></div>
+          </div>
         </div>
       </div>
+    </section>
 
-      <!-- RIGHT -->
-      <div class="meta">
-        <div><span class="k">A</span> : <span class="v">20–22%</span></div>
-        <div><span class="k">B</span> : <span class="v">0%</span></div>
+    <!-- INDICA -->
+    <section class="panel">
+      <div class="panelHead">
+        <div class="title">INDICA</div>
+        <div class="right">A / B</div>
       </div>
 
-    </div>
+      <div class="panelBody">
+        <div class="item">
+          <div class="badge">
+            <div class="badgeIcon">★</div>
+            <div class="badgeText">BEST<br>SELLER</div>
+          </div>
+
+          <div class="main">
+            <div class="name">ITEM NAME #11</div>
+            <div class="bars">
+              <div class="bar" style="--bg:#e6c122;">BISABOLOL (NUTTY)</div>
+              <div class="bar" style="--bg:#77823d;">CARYOPHYLLENE (EARTHY)</div>
+            </div>
+          </div>
+
+          <div class="meta">
+            <div><span class="k">A</span> : <span class="v">20–24%</span></div>
+            <div><span class="k">B</span> : <span class="v">&lt;1%</span></div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="badge">
+            <div class="badgeIcon">N</div>
+            <div class="badgeText">NEW<br>DROP</div>
+          </div>
+
+          <div class="main">
+            <div class="name">ITEM NAME #12</div>
+            <div class="bars">
+              <div class="bar" style="--bg:#2b398c;">MYRCENE (EARTHY)</div>
+              <div class="bar" style="--bg:#fd8b03;">HUMULENE (WOOD)</div>
+            </div>
+          </div>
+
+          <div class="meta">
+            <div><span class="k">A</span> : <span class="v">23–27%</span></div>
+            <div><span class="k">B</span> : <span class="v">&lt;1%</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HYBRID -->
+    <section class="panel">
+      <div class="panelHead">
+        <div class="title">HYBRID</div>
+        <div class="right">A / B</div>
+      </div>
+
+      <div class="panelBody">
+        <div class="item">
+          <div class="badge">
+            <div class="badgeIcon">N</div>
+            <div class="badgeText">NEW<br>DROP</div>
+          </div>
+
+          <div class="main">
+            <div class="name">ITEM NAME #21</div>
+            <div class="bars">
+              <div class="bar" style="--bg:#7bc70f;">LIMONENE (FRUIT)</div>
+              <div class="bar" style="--bg:#77823d;">CARYOPHYLLENE (SPICE)</div>
+            </div>
+          </div>
+
+          <div class="meta">
+            <div><span class="k">A</span> : <span class="v">23–27%</span></div>
+            <div><span class="k">B</span> : <span class="v">&lt;1%</span></div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="badge">
+            <div class="badgeIcon">●</div>
+            <div class="badgeText">RECO<br>PICK</div>
+          </div>
+
+          <div class="main">
+            <div class="name">ITEM NAME #22</div>
+            <div class="bars">
+              <div class="bar" style="--bg:#9094d8;">LINALOOL (FLORAL)</div>
+              <div class="bar" style="--bg:#2b398c;">MYRCENE (FRUIT)</div>
+            </div>
+          </div>
+
+          <div class="meta">
+            <div><span class="k">A</span> : <span class="v">20–24%</span></div>
+            <div><span class="k">B</span> : <span class="v">0%</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </div>
 </body>
 </html>
